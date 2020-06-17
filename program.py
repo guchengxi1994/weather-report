@@ -5,7 +5,7 @@
 @Author: xiaoshuyui
 @Date: 2020-06-16 10:29:32
 @LastEditors: xiaoshuyui
-@LastEditTime: 2020-06-16 16:07:19
+@LastEditTime: 2020-06-17 11:27:34
 '''
 import pypinyin
 import sys
@@ -20,6 +20,8 @@ from utils.sendEmail import send
 from email.mime.text import MIMEText
 from email.header import Header
 import datetime
+from utils.sendSMS import sendSMS
+from utils.translate import get_translate_youdao
 
 BASE_DIR = os.path.abspath(os.curdir)
 # config_ROOT = BASE_DIR + os.sep + 'static' + os.sep + 'w.ini'
@@ -73,16 +75,21 @@ if __name__ == "__main__":
     ss = getWeather(day,city=city_pinyin)
 
         
+    if args.info == 'email':
 
 
+        message = MIMEText('你好...{}'.format(ss), 'plain', 'utf-8')
+        message['From'] = 'testsmtp<{}>'.format(cfp.get('email','user'))
+        message['To'] = 'guchengxi<{}>'.format('guchengxi1994@qq.com')
 
-    message = MIMEText('你好...{}'.format(ss), 'plain', 'utf-8')
-    message['From'] = 'testsmtp<{}>'.format(cfp.get('email','user'))
-    message['To'] = 'guchengxi<{}>'.format('guchengxi1994@qq.com')
-
-    print(message.as_string())
-    send(message=message)
-        
+        print(message.as_string())
+        send(message=message)
+    
+    else:
+        ss = ss.replace('\n',"")
+        translation  = get_translate_youdao(ss)
+        print(translation)
+        sendSMS(translation,"+86xxxxxxxxxx")
 
 
 

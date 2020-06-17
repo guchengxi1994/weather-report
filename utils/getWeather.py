@@ -5,7 +5,7 @@
 @Author: xiaoshuyui
 @Date: 2020-06-16 11:38:21
 @LastEditors: xiaoshuyui
-@LastEditTime: 2020-06-16 16:06:29
+@LastEditTime: 2020-06-17 11:25:23
 '''
 
 import requests
@@ -55,7 +55,7 @@ def getWeather(day,city='changzhou',infomethod='email'):
                         # str=""
                         # if flag:
                         for th in range(0,len(th_list)):             # 日期
-                            res+=th_list[th].getText()+'<;;>'
+                            res+=th_list[th].getText()+' '
                         
                         res = res + '\n'
                         for td in range(0,len(td_list)):
