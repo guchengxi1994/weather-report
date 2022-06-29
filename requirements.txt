@@ -2,6 +2,6 @@ requests==2.22.0
 PyExecJS==1.5.1
 langdetect==1.0.8
 twilio==6.42.0
-numpy==1.18.4
+numpy==1.22.0
 pypinyin==0.37.0
 beautifulsoup4==4.9.1
